@@ -1,2 +1,2 @@
 # practice7_spring
-ssh练习--京华一家商城
+ssh练习--京华亿家
