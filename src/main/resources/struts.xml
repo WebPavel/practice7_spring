@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true"/>
+    <package name="default" namespace="/" extends="struts-default">
+        <!--配置首页访问Action-->
+        <action name="index" class="indexAction" method="index">
+            <result name="indexSuccess">/WEB-INF/jsp/index.jsp</result>
+        </action>
+    </package>
+    <package name="usr-customer" namespace="/usr/customer" extends="struts-default">
+        <action name="*" class="customerAction" method="{1}">
+            <result name="goRegisterSuccess">/WEB-INF/jsp/register.jsp</result>
+            <result name="registerSuccess">/WEB-INF/jsp/msg.jsp</result>
+            <result name="activateSuccess">/WEB-INF/jsp/msg.jsp</result>
+            <result name="goLoginSuccess">/WEB-INF/jsp/login.jsp</result>
+            <result name="loginSuccess" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">index</param>
+            </result>
+            <result name="logoutSuccess" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">index</param>
+            </result>
+            <result name="registerInput">/WEB-INF/jsp/register.jsp</result>
+            <result name="loginInput">/WEB-INF/jsp/login.jsp</result>
+        </action>
+        <action name="captcha" class="captchaAction" method="captcha"/>
+    </package>
+    <package name="biz-product" namespace="/biz/product" extends="struts-default">
+        <action name="*" class="productAction" method="{1}">
+            <result name="listByCategorySuccess">/WEB-INF/jsp/category_product_list.jsp</result>
+            <result name="getSuccess">/WEB-INF/jsp/product_detail.jsp</result>
+            <result name="listBySubcategorySuccess">/WEB-INF/jsp/subcategory_product_list.jsp</result>
+            <result name="goListHotProductSuccess">/WEB-INF/jsp/product_list.jsp</result>
+            <result name="goListNewProductSuccess">/WEB-INF/jsp/product_list.jsp</result>
+        </action>
+    </package>
+    <package name="biz-cart" namespace="/biz/cart" extends="struts-default">
+        <action name="*" class="cartAction" method="{1}">
+            <result name="addCartItemSuccess">/WEB-INF/jsp/cart.jsp</result>
+            <result name="clearSuccess">/WEB-INF/jsp/cart.jsp</result>
+            <result name="removeCartItemSuccess">/WEB-INF/jsp/cart.jsp</result>
+            <result name="goCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+        </action>
+    </package>
+    <package name="biz-order" namespace="/biz/order" extends="struts-default">
+        <action name="*" class="orderAction" method="{1}">
+            <result name="createSuccess">/WEB-INF/jsp/order.jsp</result>
+            <result name="createInput">/WEB-INF/jsp/msg.jsp</result>
+            <result name="callbackSuccess">/WEB-INF/jsp/notify.jsp</result>
+            <result name="listByCustomerSuccess">/WEB-INF/jsp/order_list.jsp</result>
+        </action>
+    </package>
+</struts>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="zv2.com.cn.biz.product.entity.Product" table="biz_product">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name"/>
+        <property name="marketPrice" column="marketPrice"/>
+        <property name="sellingPrice" column="sellingPrice"/>
+        <property name="discount" column="discount"/>
+        <property name="description" column="description"/>
+        <property name="imgthumb" column="imgthumb"/>
+        <property name="stock" column="stock"/>
+        <property name="sku" column="sku"/>
+        <property name="serialNumber" column="serialNumber"/>
+        <property name="upc" column="upc"/>
+        <property name="brand" column="brand"/>
+        <property name="madeIn" column="madeIn"/>
+        <property name="shelfLife" column="shelfLife"/>
+        <property name="weight" column="weight"/>
+        <property name="isHot" column="isHot"/>
+        <property name="status" column="status"/>
+        <property name="sortNumber" column="sortNumber"/>
+        <property name="gmtCreate" column="gmtCreate"/>
+        <property name="gmtModified" column="gmtModified"/>
+        <property name="remark" column="remark"/>
+        <many-to-one name="subcategory" class="zv2.com.cn.pub.subcategory.entity.Subcategory" column="subcategoryId"/>
+    </class>
+</hibernate-mapping>

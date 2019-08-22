@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="zv2.com.cn.usr.customer.entity.Customer" table="usr_customer">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="username" column="username"/>
+        <property name="password" column="password"/>
+        <property name="confirmPassword" column="confirmPassword"/>
+        <property name="telephone" column="telephone"/>
+        <property name="nickname" column="nickname"/>
+        <property name="email" column="email"/>
+        <property name="trueName" column="trueName"/>
+        <property name="gender" column="gender"/>
+        <property name="birthday" column="birthday"/>
+        <property name="region" column="region"/>
+        <property name="address" column="address"/>
+        <property name="postalCode" column="postalCode"/>
+        <property name="state" column="state"/>
+        <property name="activationCode" column="activationCode"/>
+        <property name="gmtCreate" column="gmtCreate"/>
+        <property name="gmtModified" column="gmtModified"/>
+        <property name="remark" column="remark"/>
+    </class>
+</hibernate-mapping>
