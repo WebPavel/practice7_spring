@@ -23,6 +23,6 @@
             <key column="orderId"></key>
             <one-to-many class="zv2.com.cn.biz.order.entity.OrderItem"/>
         </set>
-        <many-to-one name="customer" class="zv2.com.cn.usr.customer.entity.Customer" column="customerId"/>
+        <many-to-one name="customer" class="zv2.com.cn.usr.customer.entity.Customer" column="customerId" lazy="false"/>
     </class>
 </hibernate-mapping>

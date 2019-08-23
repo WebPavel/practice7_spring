@@ -133,7 +133,6 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
         currOrder.setAddress(order.getAddress());
         currOrder.setTelephone(order.getTelephone());
         currOrder.setConsignee(order.getConsignee());
-        currOrder.setStatus(2);
         orderService.update(currOrder);
         // 2.付款
         if ("alipay".equals(payChannel)) {
@@ -169,10 +168,24 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
         return "listByCustomerSuccess";
     }
 
+    public String get() {
+        order = orderService.get(order.getId());
+        return "getSuccess";
+    }
+
+    public String confirmReceipt() {
+        Order currOrder = orderService.get(order.getId());
+        currOrder.setStatus(4);
+        orderService.update(currOrder);
+        this.addActionMessage("亲，恭喜您，交易完成！！！");
+        return "confirmReceiptSuccess";
+    }
+
     public String close() {
         Order currOrder = orderService.get(order.getId());
-        currOrder.setStatus(6);
+        currOrder.setStatus(5);
         orderService.update(currOrder);
+        this.addActionMessage("亲，已为您关闭交易");
         return "closeSuccess";
     }
 }

@@ -22,7 +22,7 @@ public class Order {
     private BigDecimal price;
     private String sn;
     private Date gmtPayment;
-    // 1=生成订单 2=订单未支付 3=订单支付超时 4=订单已支付 5=订单完成 6=关闭交易
+    // 1=订单未支付 2=订单支付超时 3=订单已支付 4=订单完成 5=交易关闭
     private Integer status;
     private Date gmtModified;
     private String remark;

@@ -38,6 +38,6 @@ public class OrderDao extends HibernateDaoSupport {
     }
 
     public List<Order> listByCustomer(Customer customer, int firstResult, int maxResult) {
-        return this.getHibernateTemplate().executeFind(new PageHibernateCallback<Order>("from Order o where o.customer.id=?", new Object[]{customer.getId()}, firstResult, maxResult));
+        return this.getHibernateTemplate().executeFind(new PageHibernateCallback<Order>("from Order o where o.customer.id=? order by field(status,1,1,3,2,4,3,2,4,5,5),gmtCreate desc", new Object[]{customer.getId()}, firstResult, maxResult));
     }
 }
