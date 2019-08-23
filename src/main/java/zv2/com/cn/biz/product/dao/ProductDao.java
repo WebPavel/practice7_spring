@@ -83,4 +83,13 @@ public class ProductDao extends HibernateDaoSupport {
         List<Long> list = this.getHibernateTemplate().find(hql, 1);
         return list.get(0).intValue();
     }
+
+    public Integer countByName(String name) {
+        List<Long> list = this.getHibernateTemplate().find("select count(*) from Product p where p.name like ? and p.status=?", new Object[]{name+"%", 1});
+        return list.get(0).intValue();
+    }
+
+    public List<Product> listByName(String name, int firstResult, int pageSize) {
+        return this.getHibernateTemplate().find("select p from Product p where p.name like ? and p.status=? order by p.sortNumber, p.gmtCreate desc", new Object[]{name+"%", 1});
+    }
 }

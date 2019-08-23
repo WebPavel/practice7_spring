@@ -21,6 +21,7 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
     private Long subcategoryId;
     private int pageIndex;
     private int pageSize;
+    private String keyword;
     private PageBean<Product> productPageBean;
     private CategoryService categoryService;
     private ProductService productService;
@@ -44,6 +45,10 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     public void setCategoryService(CategoryService categoryService) {
@@ -100,5 +105,12 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
         ActionContext.getContext().getValueStack().set("categoryList", categoryList);
         productPageBean = productService.listNewProduct(pageIndex, pageSize);
         return "goListNewProductSuccess";
+    }
+
+    public String search() {
+        List<Category> categoryList = categoryService.list();
+        ActionContext.getContext().getValueStack().set("categoryList", categoryList);
+        productPageBean = productService.listByName(keyword, pageIndex, pageSize);
+        return "searchSuccess";
     }
 }

@@ -83,7 +83,9 @@
                 <a>鱿鱼丝</a>
             </div>
             <div class="search">
-                <form id="productSearchForm" method="get">
+                <form id="productSearchForm" action="${pageContext.request.contextPath}/biz/product/search.action" method="get">
+                    <input type="hidden" name="pageIndex" value="1">
+                    <input type="hidden" name="pageSize" value="10">
                     <input name="keyword" class="keyword" value="商品搜索" maxlength="30">
                     <button type="submit">搜索</button>
                 </form>

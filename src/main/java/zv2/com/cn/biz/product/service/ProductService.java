@@ -82,4 +82,18 @@ public class ProductService {
     public void update(Product product) {
         productDao.update(product);
     }
+
+    public PageBean<Product> listByName(String name, int pageIndex, int pageSize) {
+        PageBean<Product> productPageBean = new PageBean<>();
+        productPageBean.setPageIndex(pageIndex);
+        productPageBean.setPageSize(pageSize);
+        // 查询总记录数
+        Integer totalRecord = productDao.countByName(name);
+        productPageBean.setTotalRecord(totalRecord);
+        productPageBean.setTotalPage(totalRecord/pageSize+totalRecord%pageSize==0?0:1);
+        int firstResult = (pageIndex-1)*pageSize;
+        List<Product> productList = productDao.listByName(name, firstResult, pageSize);
+        productPageBean.setList(productList);
+        return productPageBean;
+    }
 }

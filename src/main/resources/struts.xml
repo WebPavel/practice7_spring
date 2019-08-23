@@ -37,6 +37,7 @@
             <result name="listBySubcategorySuccess">/WEB-INF/jsp/subcategory_product_list.jsp</result>
             <result name="goListHotProductSuccess">/WEB-INF/jsp/product_list.jsp</result>
             <result name="goListNewProductSuccess">/WEB-INF/jsp/product_list.jsp</result>
+            <result name="searchSuccess">/WEB-INF/jsp/product_list.jsp</result>
         </action>
     </package>
     <package name="biz-cart" namespace="/biz/cart" extends="struts-default">
