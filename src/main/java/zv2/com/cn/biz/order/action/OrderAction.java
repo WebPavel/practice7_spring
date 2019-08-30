@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.util.Assert;
 import zv2.com.cn.biz.cart.entity.Cart;
 import zv2.com.cn.biz.cart.entity.CartItem;
 import zv2.com.cn.biz.cart.service.CartService;
@@ -18,6 +19,7 @@ import zv2.com.cn.thirdparty.alipay.AlipayClientHelper;
 import zv2.com.cn.thirdparty.alipay.request.PayRequest;
 import zv2.com.cn.thirdparty.alipay.response.PayResponse;
 import zv2.com.cn.usr.customer.entity.Customer;
+import zv2.com.cn.usr.customer.service.CustomerService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,9 +42,12 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
     private int pageIndex;
     private int pageSize;
     private PageBean<Order> orderPageBean;
+    private Long customerId;
+    private String customerUsername;
     private OrderService orderService;
     private CategoryService categoryService;
     private CartService cartService;
+    private CustomerService customerService;
 
     @Override
     public Order getModel() {
@@ -69,6 +74,18 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
         return orderPageBean;
     }
 
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setCustomerUsername(String customerUsername) {
+        this.customerUsername = customerUsername;
+    }
+
+    public String getCustomerUsername() {
+        return customerUsername;
+    }
+
     public void setOrderService(OrderService orderService) {
         this.orderService = orderService;
     }
@@ -79,6 +96,10 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 
     public void setCartService(CartService cartService) {
         this.cartService = cartService;
+    }
+
+    public void setCustomerService(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     public String create() {
@@ -155,6 +176,8 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
         payResponse = AlipayClientHelper.callback(ServletActionContext.getRequest());
         Order currOrder = orderService.getBySn(payResponse.getOut_trade_no());
         currOrder.setStatus(3);
+        currOrder.setGmtPayment(new Date());
+        currOrder.setGmtModified(new Date());
         orderService.update(currOrder);
         return "callbackSuccess";
     }
@@ -175,7 +198,7 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 
     public String confirmReceipt() {
         Order currOrder = orderService.get(order.getId());
-        currOrder.setStatus(4);
+        currOrder.setStatus(5);
         orderService.update(currOrder);
         this.addActionMessage("亲，恭喜您，交易完成！！！");
         return "confirmReceiptSuccess";
@@ -183,9 +206,44 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 
     public String close() {
         Order currOrder = orderService.get(order.getId());
-        currOrder.setStatus(5);
+        currOrder.setStatus(6);
         orderService.update(currOrder);
         this.addActionMessage("亲，已为您关闭交易");
         return "closeSuccess";
+    }
+
+    public String list() {
+        orderPageBean = orderService.list(pageIndex, pageSize);
+        return "listSuccess";
+    }
+
+    public String selected() {
+        order = orderService.get(order.getId());
+        return "selectedSuccess";
+    }
+
+    public String update() {
+        Customer customer = customerService.get(customerId);
+        order.setCustomer(customer);
+        order.setGmtModified(new Date());
+        orderService.update(order);
+        return "updateSuccess";
+    }
+
+    public String listByCondition() {
+        if (customerUsername != null && !"".equals(customerUsername.trim())) {
+            Customer currCustomer = customerService.findByUsername(customerUsername);
+            Assert.notNull(currCustomer, "找不到用户");
+            customerId = currCustomer.getId();
+        } else {
+            customerId = null;
+        }
+        orderPageBean = orderService.queryByCondition(order, customerId, pageIndex, pageSize);
+        return "listByConditionSuccess";
+    }
+
+    public String detail() {
+        order = orderService.get(order.getId());
+        return "detailSuccess";
     }
 }

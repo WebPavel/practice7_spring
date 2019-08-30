@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
 import org.apache.struts2.ServletActionContext;
+import zv2.com.cn.common.util.PageBean;
 import zv2.com.cn.usr.customer.entity.Customer;
 import zv2.com.cn.usr.customer.service.CustomerService;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Date;
 
 /**
  * @author lb
@@ -19,18 +21,17 @@ import java.net.URLEncoder;
  */
 public class CustomerAction extends ActionSupport implements ModelDriven<Customer> {
     private Customer customer = new Customer();
-    @Override
-    public Customer getModel() {
-        return customer;
-    }
-    private CustomerService customerService;
     // 验证码
     private String captcha;
     // 记住用户名
     private Boolean isRememberUsername;
-
-    public void setCustomerService(CustomerService customerService) {
-        this.customerService = customerService;
+    private int pageIndex;
+    private int pageSize;
+    private PageBean<Customer> customerPageBean;
+    private CustomerService customerService;
+    @Override
+    public Customer getModel() {
+        return customer;
     }
 
     public void setCaptcha(String captcha) {
@@ -39,6 +40,22 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 
     public void setIsRememberUsername(Boolean isRememberUsername) {
         this.isRememberUsername = isRememberUsername;
+    }
+
+    public void setPageIndex(int pageIndex) {
+        this.pageIndex = pageIndex;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public PageBean<Customer> getCustomerPageBean() {
+        return customerPageBean;
+    }
+
+    public void setCustomerService(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     public String goRegister() {
@@ -115,5 +132,34 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
     public String logout() {
         ServletActionContext.getRequest().getSession().invalidate();
         return "logoutSuccess";
+    }
+
+    public String list() {
+        customerPageBean = customerService.list(pageIndex, pageSize);
+        return "listSuccess";
+    }
+
+    public String selected() {
+        customer = customerService.get(customer.getId());
+        return "selectedSuccess";
+    }
+
+    public String update() {
+        customer.setGmtModified(new Date());
+        customerService.update(customer);
+        return "updateSuccess";
+    }
+
+    public String delete() {
+        Customer currCustomer = customerService.get(customer.getId());
+        currCustomer.setState(2);
+        currCustomer.setGmtModified(new Date());
+        customerService.update(currCustomer);
+        return "deleteSuccess";
+    }
+
+    public String listByCondition() {
+        customerPageBean = customerService.queryByCondition(customer, pageIndex, pageSize);
+        return "listByConditionSuccess";
     }
 }

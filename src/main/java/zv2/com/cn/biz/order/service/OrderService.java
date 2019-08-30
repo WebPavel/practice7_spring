@@ -40,11 +40,34 @@ public class OrderService {
         PageBean<Order> orderPageBean = new PageBean<>();
         orderPageBean.setPageIndex(pageIndex);
         orderPageBean.setPageSize(pageSize);
-        Integer totalRecord = orderDao.countByCustomer(customer);
+        int totalRecord = orderDao.countByCustomer(customer);
         orderPageBean.setTotalRecord(totalRecord);
-        orderPageBean.setTotalPage(totalRecord/pageSize + totalRecord%pageSize==0?0:1);
         int firstResult = (pageIndex-1) * pageSize;
         List<Order> orderList = orderDao.listByCustomer(customer, firstResult, pageSize);
+        orderPageBean.setList(orderList);
+        return orderPageBean;
+    }
+
+    public PageBean<Order> list(int pageIndex, int pageSize) {
+        PageBean<Order> orderPageBean = new PageBean<>();
+        orderPageBean.setPageIndex(pageIndex);
+        orderPageBean.setPageSize(pageSize);
+        int totalRecord = orderDao.count();
+        orderPageBean.setTotalRecord(totalRecord);
+        int firstResult = (pageIndex-1) * pageSize;
+        List<Order> orderList = orderDao.list(firstResult, pageSize);
+        orderPageBean.setList(orderList);
+        return orderPageBean;
+    }
+
+    public PageBean<Order> queryByCondition(Order order, Long customerId, int pageIndex, int pageSize) {
+        PageBean<Order> orderPageBean = new PageBean<>();
+        orderPageBean.setPageIndex(pageIndex);
+        orderPageBean.setPageSize(pageSize);
+        int totalRecord = orderDao.countByCustomer(order, customerId);
+        orderPageBean.setTotalRecord(totalRecord);
+        int firstResult = (pageIndex-1) * pageSize;
+        List<Order> orderList = orderDao.listByCustomer(order, customerId, firstResult, pageSize);
         orderPageBean.setList(orderList);
         return orderPageBean;
     }

@@ -1,8 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>会员登录</title>
     <link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet" type="text/css">
@@ -18,6 +17,7 @@
                 alert("密码不能为空！且长度不能少于6位！");
                 return false;
             }
+            return true;
         }
         function redrawCaptcha() {
             var captchaImage = document.getElementById("captchaImage");

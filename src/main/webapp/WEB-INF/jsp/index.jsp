@@ -1,7 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>京华亿家</title>
     <link href="${pageContext.request.contextPath}/css/slider.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet" type="text/css"/>

@@ -36,7 +36,7 @@ public class IndexAction extends ActionSupport {
         return newProductList;
     }
 
-    public String index() throws Exception {
+    public String index() {
         List<Category> categoryList = categoryService.list();
         ActionContext.getContext().getValueStack().set("categoryList", categoryList);
         hotProductList = productService.listHotProduct(1, 10).getList();

@@ -283,6 +283,13 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
+          <configuration>
+            <encoding>UTF-8</encoding>
+            <compilerArguments>
+              <verbose />
+              <bootclasspath>${java.home}\lib\rt.jar${path.separator}${java.home}\lib\jce.jar${path.separator}</bootclasspath>
+            </compilerArguments>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>

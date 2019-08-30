@@ -10,6 +10,13 @@
         <action name="index" class="indexAction" method="index">
             <result name="indexSuccess">/WEB-INF/jsp/index.jsp</result>
         </action>
+        <action name="*" class="adminAction" method="{1}">
+            <result name="adminSuccess">/WEB-INF/jsp/admin/index.jsp</result>
+            <result name="goTopSuccess">/WEB-INF/jsp/admin/top.jsp</result>
+            <result name="goLeftSuccess">/WEB-INF/jsp/admin/left.jsp</result>
+            <result name="goDisplaySuccess">/WEB-INF/jsp/admin/display.jsp</result>
+            <result name="goBottomSuccess">/WEB-INF/jsp/admin/bottom.jsp</result>
+        </action>
     </package>
     <package name="usr-customer" namespace="/usr/customer" extends="struts-default">
         <action name="*" class="customerAction" method="{1}">
@@ -27,8 +34,35 @@
             </result>
             <result name="registerInput">/WEB-INF/jsp/register.jsp</result>
             <result name="loginInput">/WEB-INF/jsp/login.jsp</result>
+            <result name="listSuccess">/WEB-INF/jsp/admin/usr/customer/list.jsp</result>
+            <result name="selectedSuccess">/WEB-INF/jsp/admin/usr/customer/item.jsp</result>
+            <result name="updateSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="listByConditionSuccess">/WEB-INF/jsp/admin/usr/customer/list.jsp</result>
+            <result name="deleteSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
         </action>
         <action name="captcha" class="captchaAction" method="captcha"/>
+    </package>
+    <package name="pub-category" namespace="/pub/category" extends="struts-default">
+        <action name="*" class="categoryAction" method="{1}">
+            <result name="listSuccess">/WEB-INF/jsp/admin/pub/category/list.jsp</result>
+            <result name="goAddSuccess">/WEB-INF/jsp/admin/pub/category/add.jsp</result>
+            <result name="addSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="deleteSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="selectedSuccess">/WEB-INF/jsp/admin/pub/category/edit.jsp</result>
+            <result name="updateSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="listByConditionSuccess">/WEB-INF/jsp/admin/pub/category/list.jsp</result>
+        </action>
+    </package>
+    <package name="pub-subcategory" namespace="/pub/subcategory" extends="struts-default">
+        <action name="*" class="subcategoryAction" method="{1}">
+            <result name="listSuccess">/WEB-INF/jsp/admin/pub/subcategory/list.jsp</result>
+            <result name="goAddSuccess">/WEB-INF/jsp/admin/pub/subcategory/add.jsp</result>
+            <result name="addSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="deleteSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="selectedSuccess">/WEB-INF/jsp/admin/pub/subcategory/edit.jsp</result>
+            <result name="updateSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="listByConditionSuccess">/WEB-INF/jsp/admin/pub/subcategory/list.jsp</result>
+        </action>
     </package>
     <package name="biz-product" namespace="/biz/product" extends="struts-default">
         <action name="*" class="productAction" method="{1}">
@@ -38,6 +72,13 @@
             <result name="goListHotProductSuccess">/WEB-INF/jsp/product_list.jsp</result>
             <result name="goListNewProductSuccess">/WEB-INF/jsp/product_list.jsp</result>
             <result name="searchSuccess">/WEB-INF/jsp/product_list.jsp</result>
+            <result name="listSuccess">/WEB-INF/jsp/admin/biz/product/list.jsp</result>
+            <result name="goAddSuccess">/WEB-INF/jsp/admin/biz/product/add.jsp</result>
+            <result name="addSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="deleteSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="selectedSuccess">/WEB-INF/jsp/admin/biz/product/edit.jsp</result>
+            <result name="updateSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="listByConditionSuccess">/WEB-INF/jsp/admin/biz/product/list.jsp</result>
         </action>
     </package>
     <package name="biz-cart" namespace="/biz/cart" extends="struts-default">
@@ -57,6 +98,25 @@
             <result name="getSuccess">/WEB-INF/jsp/order.jsp</result>
             <result name="confirmReceiptSuccess">/WEB-INF/jsp/msg.jsp</result>
             <result name="closeSuccess">/WEB-INF/jsp/msg.jsp</result>
+            <result name="listSuccess">/WEB-INF/jsp/admin/biz/order/list.jsp</result>
+            <result name="selectedSuccess">/WEB-INF/jsp/admin/biz/order/edit.jsp</result>
+            <result name="updateSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="listByConditionSuccess">/WEB-INF/jsp/admin/biz/order/list.jsp</result>
+            <result name="detailSuccess">/WEB-INF/jsp/admin/biz/order/item.jsp</result>
+        </action>
+    </package>
+    <package name="usr-manager" namespace="/usr/manager" extends="struts-default">
+        <action name="*" class="managerAction" method="{1}">
+            <result name="loginSuccess">/WEB-INF/jsp/admin/home.jsp</result>
+            <result name="loginInput">/WEB-INF/jsp/admin/index.jsp</result>
+            <result name="goIndexSuccess" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">index</param>
+            </result>
+            <result name="logoutSuccess" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">admin</param>
+            </result>
         </action>
     </package>
 </struts>

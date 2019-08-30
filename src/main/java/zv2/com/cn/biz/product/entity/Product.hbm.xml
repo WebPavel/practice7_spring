@@ -27,6 +27,6 @@
         <property name="gmtCreate" column="gmtCreate"/>
         <property name="gmtModified" column="gmtModified"/>
         <property name="remark" column="remark"/>
-        <many-to-one name="subcategory" class="zv2.com.cn.pub.subcategory.entity.Subcategory" column="subcategoryId"/>
+        <many-to-one name="subcategory" class="zv2.com.cn.pub.subcategory.entity.Subcategory" column="subcategoryId" lazy="false"/>
     </class>
 </hibernate-mapping>

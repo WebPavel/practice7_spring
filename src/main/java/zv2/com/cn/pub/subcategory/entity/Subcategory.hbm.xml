@@ -14,8 +14,8 @@
         <property name="gmtCreate" column="gmtCreate"/>
         <property name="gmtModified" column="gmtModified"/>
         <property name="remark" column="remark"/>
-        <many-to-one name="category" class="zv2.com.cn.pub.category.entity.Category" column="categoryId"/>
-        <set name="productSet">
+        <many-to-one name="category" class="zv2.com.cn.pub.category.entity.Category" column="categoryId" lazy="false"/>
+        <set name="productSet" inverse="true">
             <key column="subcategoryId"></key>
             <one-to-many class="zv2.com.cn.biz.product.entity.Product"/>
         </set>

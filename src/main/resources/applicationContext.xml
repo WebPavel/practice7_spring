@@ -41,6 +41,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
                 <value>zv2/com/cn/pub/subcategory/entity/Subcategory.hbm.xml</value>
                 <value>zv2/com/cn/biz/order/entity/Order.hbm.xml</value>
                 <value>zv2/com/cn/biz/order/entity/OrderItem.hbm.xml</value>
+                <value>zv2/com/cn/usr/manager/entity/Manager.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -57,6 +58,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="categoryService" ref="categoryService"/>
         <property name="productService" ref="productService"/>
     </bean>
+    <bean id="adminAction" class="zv2.com.cn.web.admin.action.AdminAction" scope="prototype">
+    </bean>
     <!--验证码-->
     <bean id="captchaAction" class="zv2.com.cn.usr.customer.action.CaptchaAction" scope="prototype"/>
     <bean id="customerAction" class="zv2.com.cn.usr.customer.action.CustomerAction" scope="prototype">
@@ -65,9 +68,14 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <bean id="categoryAction" class="zv2.com.cn.pub.category.action.CategoryAction" scope="prototype">
         <property name="categoryService" ref="categoryService"/>
     </bean>
+    <bean id="subcategoryAction" class="zv2.com.cn.pub.subcategory.action.SubcategoryAction" scope="prototype">
+        <property name="subcategoryService" ref="subcategoryService"/>
+        <property name="categoryService" ref="categoryService"/>
+    </bean>
     <bean id="productAction" class="zv2.com.cn.biz.product.action.ProductAction" scope="prototype">
         <property name="categoryService" ref="categoryService"/>
         <property name="productService" ref="productService"/>
+        <property name="subcategoryService" ref="subcategoryService"/>
     </bean>
     <bean id="cartAction" class="zv2.com.cn.biz.cart.action.CartAction" scope="prototype">
         <property name="productService" ref="productService"/>
@@ -78,6 +86,10 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="orderService" ref="orderService"/>
         <property name="categoryService" ref="categoryService"/>
         <property name="cartService" ref="cartService"/>
+        <property name="customerService" ref="customerService"/>
+    </bean>
+    <bean id="managerAction" class="zv2.com.cn.usr.manager.action.ManagerAction" scope="prototype">
+        <property name="managerService" ref="managerService"/>
     </bean>
 
     <!--配置Service-->
@@ -87,6 +99,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <bean id="categoryService" class="zv2.com.cn.pub.category.service.CategoryService">
         <property name="categoryDao" ref="categoryDao"/>
     </bean>
+    <bean id="subcategoryService" class="zv2.com.cn.pub.subcategory.service.SubcategoryService">
+        <property name="subcategoryDao" ref="subcategoryDao"/>
+    </bean>
     <bean id="productService" class="zv2.com.cn.biz.product.service.ProductService">
         <property name="productDao" ref="productDao"/>
     </bean>
@@ -94,6 +109,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     </bean>
     <bean id="orderService" class="zv2.com.cn.biz.order.service.OrderService">
         <property name="orderDao" ref="orderDao"/>
+    </bean>
+    <bean id="managerService" class="zv2.com.cn.usr.manager.service.ManagerService">
+        <property name="managerDao" ref="managerDao"/>
     </bean>
 
     <!--配置DAO-->
@@ -103,10 +121,16 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <bean id="categoryDao" class="zv2.com.cn.pub.category.dao.CategoryDao">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <bean id="subcategoryDao" class="zv2.com.cn.pub.subcategory.dao.SubcategoryDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
     <bean id="productDao" class="zv2.com.cn.biz.product.dao.ProductDao">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <bean id="orderDao" class="zv2.com.cn.biz.order.dao.OrderDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="managerDao" class="zv2.com.cn.usr.manager.dao.ManagerDao">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 </beans>

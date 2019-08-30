@@ -19,7 +19,7 @@
         <property name="status" column="status"/>
         <property name="gmtModified" column="gmtModified"/>
         <property name="remark" column="remark"/>
-        <set name="orderItemSet" cascade="save-update" lazy="false">
+        <set name="orderItemSet" cascade="save-update" lazy="false" inverse="true">
             <key column="orderId"></key>
             <one-to-many class="zv2.com.cn.biz.order.entity.OrderItem"/>
         </set>

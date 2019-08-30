@@ -14,7 +14,7 @@
         <property name="gmtCreate" column="gmtCreate"/>
         <property name="gmtModified" column="gmtModified"/>
         <property name="remark" column="remark"/>
-        <set name="subcategorySet" order-by="id" lazy="false">
+        <set name="subcategorySet" order-by="id" cascade="delete" lazy="false" inverse="true">
             <key column="categoryId"></key>
             <one-to-many class="zv2.com.cn.pub.subcategory.entity.Subcategory"/>
         </set>

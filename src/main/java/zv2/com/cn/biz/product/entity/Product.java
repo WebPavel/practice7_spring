@@ -25,7 +25,7 @@ public class Product {
     private String madeIn;
     private Date shelfLife;
     private BigDecimal weight;
-    private Boolean isHot;
+    private Integer isHot;
     private Integer status;
     private Integer sortNumber;
     private Date gmtCreate;
@@ -153,11 +153,11 @@ public class Product {
         this.weight = weight;
     }
 
-    public Boolean getIsHot() {
+    public Integer getIsHot() {
         return isHot;
     }
 
-    public void setIsHot(Boolean isHot) {
+    public void setIsHot(Integer isHot) {
         this.isHot = isHot;
     }
 

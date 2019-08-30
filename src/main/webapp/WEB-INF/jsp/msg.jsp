@@ -1,8 +1,7 @@
-<%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" isELIgnored="false" %>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
 </head>

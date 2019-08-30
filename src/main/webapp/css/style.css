@@ -26,7 +26,7 @@ a:visited {
 }
 a:hover {
 	text-decoration:none;
-	color:#990099;/*颜色变换*/
+	color:#990099;/*棰滆壊鍙樻崲*/
 }
 a:active {
 	text-decoration: none;
@@ -88,7 +88,6 @@ padding:10px 50px 25px 135px;
 	text-align:center;
 	padding:10px 0px 10px 0px;
 	font-size:14px;
-	/*background-image:url(../images/menubg.gif);*/
 }
 
 #divmenu a{
@@ -107,7 +106,7 @@ padding:10px 50px 25px 135px;
 }
 #divmenu a:hover {
 	text-decoration:none;
-	color:#999999;/*颜色变换*/
+	color:#999999;/*棰滆壊鍙樻崲*/
 	font-weight:bold;
 }
 #divmenu a:active {
@@ -291,7 +290,7 @@ padding:1px;
 	border: 1px solid #999999;
 }
 
-/*分页*/ 
+/*鍒嗛〉*/ 
 
 .pagination{ 
     padding: 5px;
@@ -345,7 +344,7 @@ color: #929292;
     padding: 5px;
 } 
 
-/*分页*/ 
+/*鍒嗛〉*/ 
 
 
 

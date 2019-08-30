@@ -14,7 +14,7 @@ import java.util.Set;
 public class Subcategory {
     private Long id;
     private String name;
-    private Boolean isHot;
+    private Integer isHot;
     private Integer status;
     private Integer sortNumber;
     private Date gmtCreate;
@@ -39,11 +39,11 @@ public class Subcategory {
         this.name = name;
     }
 
-    public Boolean getIsHot() {
+    public Integer getIsHot() {
         return isHot;
     }
 
-    public void setIsHot(Boolean isHot) {
+    public void setIsHot(Integer isHot) {
         this.isHot = isHot;
     }
 

@@ -28,7 +28,7 @@ CREATE TABLE `pub_subcategory` (
   `gmtCreate` datetime NOT NULL,
   `gmtModified` datetime NOT NULL,
   `remark` varchar(255) DEFAULT NULL,
-  `categoryId` bigint(20) unsigned NOT NULL,
+  `categoryId` bigint(20) unsigned,
   PRIMARY KEY (`id`),
   KEY `categoryId` (`categoryId`),
   CONSTRAINT `pub_subcategory_ibfk_1` FOREIGN KEY (`categoryId`) REFERENCES `pub_category` (`id`)

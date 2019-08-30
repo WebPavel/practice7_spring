@@ -5,11 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import zv2.com.cn.common.factory.InstanceFactory;
 import zv2.com.cn.common.util.MailUtils;
+import zv2.com.cn.common.util.PageBean;
 import zv2.com.cn.common.util.StringUtils;
 import zv2.com.cn.usr.customer.dao.CustomerDao;
 import zv2.com.cn.usr.customer.entity.Customer;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author lb
@@ -68,5 +70,33 @@ public class CustomerService {
 
     public Customer findByUsername(String username) {
         return customerDao.findByUsername(username);
+    }
+
+    public Customer get(Long id) {
+        return customerDao.get(id);
+    }
+
+    public PageBean<Customer> list(int pageIndex, int pageSize) {
+        PageBean<Customer> customerPageBean = new PageBean<>();
+        customerPageBean.setPageIndex(pageIndex);
+        customerPageBean.setPageSize(pageSize);
+        int totalRecord = customerDao.count();
+        customerPageBean.setTotalRecord(totalRecord);
+        int firstResult = (pageIndex - 1) * pageSize;
+        List<Customer> customerList = customerDao.list(firstResult, pageSize);
+        customerPageBean.setList(customerList);
+        return customerPageBean;
+    }
+
+    public PageBean<Customer> queryByCondition(Customer customer, int pageIndex, int pageSize) {
+        PageBean<Customer> customerPageBean = new PageBean<>();
+        customerPageBean.setPageIndex(pageIndex);
+        customerPageBean.setPageSize(pageSize);
+        int totalRecord = customerDao.countByCondition(customer);
+        customerPageBean.setTotalRecord(totalRecord);
+        int firstResult = (pageIndex - 1) * pageSize;
+        List<Customer> customerList = customerDao.listByCondition(customer, firstResult, pageSize);
+        customerPageBean.setList(customerList);
+        return customerPageBean;
     }
 }

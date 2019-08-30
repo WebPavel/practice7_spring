@@ -2,7 +2,6 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title>京华亿家</title>
 	<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet" type="text/css">
 	<link href="${pageContext.request.contextPath}/css/product.css" rel="stylesheet" type="text/css">

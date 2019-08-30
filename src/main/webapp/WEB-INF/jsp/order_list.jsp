@@ -2,7 +2,6 @@
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <title>我的订单</title>
     <link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/css/cart.css" rel="stylesheet" type="text/css"/>
@@ -22,7 +21,7 @@
                         订单号：<s:property value="#order.sn"/>
                         金额：￥<s:property value="#order.price"/>
                         订单状态：
-                        <%--1=订单未支付 2=订单支付超时 3=订单已支付 4=订单完成 5=交易关闭--%>
+                        <%--1=订单未支付 2=订单支付超时 3=订单已支付 4=已发货 5=订单完成 6=交易关闭--%>
                         <s:if test="#order.status == 1">
                             未付款&nbsp;&nbsp;
                             <a href="${pageContext.request.contextPath}/biz/order/get.action?id=<s:property value="#order.id"/>">
@@ -31,13 +30,16 @@
                         </s:if>
                         <s:elseif test="#order.status == 2">支付超时</s:elseif>
                         <s:elseif test="#order.status == 3">
-                            付款成功&nbsp;&nbsp;
+                            付款成功
+                        </s:elseif>
+                        <s:elseif test="#order.status == 4">
+                            已发货&nbsp;&nbsp;
                             <a href="${pageContext.request.contextPath}/biz/order/confirmReceipt.action?id=<s:property value="#order.id"/>">
                                 <font color="green">确认收货</font>
                             </a>
                         </s:elseif>
-                        <s:elseif test="#order.status == 4">订单完成</s:elseif>
-                        <s:elseif test="#order.status == 5">交易关闭</s:elseif>
+                        <s:elseif test="#order.status == 5">订单完成</s:elseif>
+                        <s:elseif test="#order.status == 6">交易关闭</s:elseif>
                     </th>
                 </tr>
                 <tr>
