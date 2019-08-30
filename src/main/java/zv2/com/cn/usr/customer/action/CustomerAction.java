@@ -1,10 +1,13 @@
 package zv2.com.cn.usr.customer.action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
 import org.apache.struts2.ServletActionContext;
 import zv2.com.cn.common.util.PageBean;
+import zv2.com.cn.pub.category.entity.Category;
+import zv2.com.cn.pub.category.service.CategoryService;
 import zv2.com.cn.usr.customer.entity.Customer;
 import zv2.com.cn.usr.customer.service.CustomerService;
 
@@ -14,6 +17,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author lb
@@ -29,6 +33,8 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
     private int pageSize;
     private PageBean<Customer> customerPageBean;
     private CustomerService customerService;
+    private CategoryService categoryService;
+
     @Override
     public Customer getModel() {
         return customer;
@@ -58,7 +64,14 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
         this.customerService = customerService;
     }
 
+    public void setCategoryService(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
     public String goRegister() {
+        List<Category> categoryList = categoryService.list();
+        ActionContext.getContext().getValueStack().set("categoryList", categoryList);
+
         return "goRegisterSuccess";
     }
 
@@ -88,6 +101,9 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
     }
 
     public String goLogin() {
+        List<Category> categoryList = categoryService.list();
+        ActionContext.getContext().getValueStack().set("categoryList", categoryList);
+
         return "goLoginSuccess";
     }
 
@@ -145,6 +161,9 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
     }
 
     public String update() {
+        Customer currCustomer = customerService.get(customer.getId());
+        customer.setPassword(currCustomer.getPassword());
+        customer.setConfirmPassword(currCustomer.getConfirmPassword());
         customer.setGmtModified(new Date());
         customerService.update(customer);
         return "updateSuccess";
