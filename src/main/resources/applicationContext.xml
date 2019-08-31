@@ -52,6 +52,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
+    <!--配置拦截器-->
+    <bean id="loginInterceptor" class="zv2.com.cn.interceptor.LoginInterceptor"/>
     <!--配置Action-->
     <!--注意scope多例，否则默认单例-->
     <bean id="indexAction" class="zv2.com.cn.web.index.action.IndexAction" scope="prototype">

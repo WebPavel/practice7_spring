@@ -4,6 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+    <!--打开开发者模式-->
     <constant name="struts.devMode" value="true"/>
     <package name="default" namespace="/" extends="struts-default">
         <!--配置首页访问Action-->
@@ -18,105 +19,18 @@
             <result name="goBottomSuccess">/WEB-INF/jsp/admin/bottom.jsp</result>
         </action>
     </package>
-    <package name="usr-customer" namespace="/usr/customer" extends="struts-default">
-        <action name="*" class="customerAction" method="{1}">
-            <result name="goRegisterSuccess">/WEB-INF/jsp/register.jsp</result>
-            <result name="registerSuccess">/WEB-INF/jsp/msg.jsp</result>
-            <result name="activateSuccess">/WEB-INF/jsp/msg.jsp</result>
-            <result name="goLoginSuccess">/WEB-INF/jsp/login.jsp</result>
-            <result name="loginSuccess" type="redirectAction">
-                <param name="namespace">/</param>
-                <param name="actionName">index</param>
-            </result>
-            <result name="logoutSuccess" type="redirectAction">
-                <param name="namespace">/</param>
-                <param name="actionName">index</param>
-            </result>
-            <result name="registerInput">/WEB-INF/jsp/register.jsp</result>
-            <result name="loginInput">/WEB-INF/jsp/login.jsp</result>
-            <result name="listSuccess">/WEB-INF/jsp/admin/usr/customer/list.jsp</result>
-            <result name="selectedSuccess">/WEB-INF/jsp/admin/usr/customer/item.jsp</result>
-            <result name="updateSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
-            <result name="listByConditionSuccess">/WEB-INF/jsp/admin/usr/customer/list.jsp</result>
-            <result name="deleteSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
-        </action>
-        <action name="captcha" class="captchaAction" method="captcha"/>
-    </package>
-    <package name="pub-category" namespace="/pub/category" extends="struts-default">
-        <action name="*" class="categoryAction" method="{1}">
-            <result name="listSuccess">/WEB-INF/jsp/admin/pub/category/list.jsp</result>
-            <result name="goAddSuccess">/WEB-INF/jsp/admin/pub/category/add.jsp</result>
-            <result name="addSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
-            <result name="deleteSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
-            <result name="selectedSuccess">/WEB-INF/jsp/admin/pub/category/edit.jsp</result>
-            <result name="updateSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
-            <result name="listByConditionSuccess">/WEB-INF/jsp/admin/pub/category/list.jsp</result>
-        </action>
-    </package>
-    <package name="pub-subcategory" namespace="/pub/subcategory" extends="struts-default">
-        <action name="*" class="subcategoryAction" method="{1}">
-            <result name="listSuccess">/WEB-INF/jsp/admin/pub/subcategory/list.jsp</result>
-            <result name="goAddSuccess">/WEB-INF/jsp/admin/pub/subcategory/add.jsp</result>
-            <result name="addSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
-            <result name="deleteSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
-            <result name="selectedSuccess">/WEB-INF/jsp/admin/pub/subcategory/edit.jsp</result>
-            <result name="updateSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
-            <result name="listByConditionSuccess">/WEB-INF/jsp/admin/pub/subcategory/list.jsp</result>
-        </action>
-    </package>
-    <package name="biz-product" namespace="/biz/product" extends="struts-default">
-        <action name="*" class="productAction" method="{1}">
-            <result name="listByCategorySuccess">/WEB-INF/jsp/category_product_list.jsp</result>
-            <result name="getSuccess">/WEB-INF/jsp/product_detail.jsp</result>
-            <result name="listBySubcategorySuccess">/WEB-INF/jsp/subcategory_product_list.jsp</result>
-            <result name="goListHotProductSuccess">/WEB-INF/jsp/product_list.jsp</result>
-            <result name="goListNewProductSuccess">/WEB-INF/jsp/product_list.jsp</result>
-            <result name="searchSuccess">/WEB-INF/jsp/product_list.jsp</result>
-            <result name="listSuccess">/WEB-INF/jsp/admin/biz/product/list.jsp</result>
-            <result name="goAddSuccess">/WEB-INF/jsp/admin/biz/product/add.jsp</result>
-            <result name="addSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
-            <result name="deleteSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
-            <result name="selectedSuccess">/WEB-INF/jsp/admin/biz/product/edit.jsp</result>
-            <result name="updateSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
-            <result name="listByConditionSuccess">/WEB-INF/jsp/admin/biz/product/list.jsp</result>
-        </action>
-    </package>
-    <package name="biz-cart" namespace="/biz/cart" extends="struts-default">
-        <action name="*" class="cartAction" method="{1}">
-            <result name="addCartItemSuccess">/WEB-INF/jsp/cart.jsp</result>
-            <result name="clearSuccess">/WEB-INF/jsp/cart.jsp</result>
-            <result name="removeCartItemSuccess">/WEB-INF/jsp/cart.jsp</result>
-            <result name="goCartSuccess">/WEB-INF/jsp/cart.jsp</result>
-        </action>
-    </package>
-    <package name="biz-order" namespace="/biz/order" extends="struts-default">
-        <action name="*" class="orderAction" method="{1}">
-            <result name="createSuccess">/WEB-INF/jsp/order.jsp</result>
-            <result name="createInput">/WEB-INF/jsp/msg.jsp</result>
-            <result name="callbackSuccess">/WEB-INF/jsp/notify.jsp</result>
-            <result name="listByCustomerSuccess">/WEB-INF/jsp/order_list.jsp</result>
-            <result name="getSuccess">/WEB-INF/jsp/order.jsp</result>
-            <result name="confirmReceiptSuccess">/WEB-INF/jsp/msg.jsp</result>
-            <result name="closeSuccess">/WEB-INF/jsp/msg.jsp</result>
-            <result name="listSuccess">/WEB-INF/jsp/admin/biz/order/list.jsp</result>
-            <result name="selectedSuccess">/WEB-INF/jsp/admin/biz/order/edit.jsp</result>
-            <result name="updateSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
-            <result name="listByConditionSuccess">/WEB-INF/jsp/admin/biz/order/list.jsp</result>
-            <result name="detailSuccess">/WEB-INF/jsp/admin/biz/order/item.jsp</result>
-        </action>
-    </package>
-    <package name="usr-manager" namespace="/usr/manager" extends="struts-default">
-        <action name="*" class="managerAction" method="{1}">
-            <result name="loginSuccess">/WEB-INF/jsp/admin/home.jsp</result>
-            <result name="loginInput">/WEB-INF/jsp/admin/index.jsp</result>
-            <result name="goIndexSuccess" type="redirectAction">
-                <param name="namespace">/</param>
-                <param name="actionName">index</param>
-            </result>
-            <result name="logoutSuccess" type="redirectAction">
-                <param name="namespace">/</param>
-                <param name="actionName">admin</param>
-            </result>
-        </action>
-    </package>
+    <!--用户-->
+    <include file="zv2/com/cn/usr/customer/struts-customer.xml"/>
+    <!--一级分类-->
+    <include file="zv2/com/cn/pub/category/struts-category.xml"/>
+    <!--二级分类-->
+    <include file="zv2/com/cn/pub/subcategory/struts-subcategory.xml"/>
+    <!--商品-->
+    <include file="zv2/com/cn/biz/product/struts-product.xml"/>
+    <!--购物车-->
+    <include file="zv2/com/cn/biz/cart/struts-cart.xml"/>
+    <!--订单-->
+    <include file="zv2/com/cn/biz/order/struts-order.xml"/>
+    <!--管理员-->
+    <include file="zv2/com/cn/usr/manager/struts-manager.xml"/>
 </struts>

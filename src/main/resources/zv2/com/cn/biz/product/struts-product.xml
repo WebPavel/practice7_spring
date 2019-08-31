@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="biz-product" namespace="/biz/product" extends="struts-default">
+        <interceptors>
+            <interceptor name="loginInterceptor" class="loginInterceptor">
+                <param name="includeMethods">list,goAdd,add,delete,selected,update,listByCondition</param>
+            </interceptor>
+            <interceptor-stack name="productStack">
+                <interceptor-ref name="loginInterceptor"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <global-results>
+            <result name="login">/WEB-INF/jsp/admin/index.jsp</result>
+        </global-results>
+        <action name="*" class="productAction" method="{1}">
+            <result name="listByCategorySuccess">/WEB-INF/jsp/category_product_list.jsp</result>
+            <result name="getSuccess">/WEB-INF/jsp/product_detail.jsp</result>
+            <result name="listBySubcategorySuccess">/WEB-INF/jsp/subcategory_product_list.jsp</result>
+            <result name="goListHotProductSuccess">/WEB-INF/jsp/product_list.jsp</result>
+            <result name="goListNewProductSuccess">/WEB-INF/jsp/product_list.jsp</result>
+            <result name="searchSuccess">/WEB-INF/jsp/product_list.jsp</result>
+            <result name="listSuccess">/WEB-INF/jsp/admin/biz/product/list.jsp</result>
+            <result name="goAddSuccess">/WEB-INF/jsp/admin/biz/product/add.jsp</result>
+            <result name="addSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="deleteSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="selectedSuccess">/WEB-INF/jsp/admin/biz/product/edit.jsp</result>
+            <result name="updateSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="listByConditionSuccess">/WEB-INF/jsp/admin/biz/product/list.jsp</result>
+            <interceptor-ref name="productStack"/>
+        </action>
+    </package>
+
+</struts>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="usr-manager" namespace="/usr/manager" extends="struts-default">
+        <interceptors>
+            <interceptor name="loginInterceptor" class="loginInterceptor">
+                <param name="excludeMethods">login</param>
+            </interceptor>
+            <interceptor-stack name="managerStack">
+                <interceptor-ref name="loginInterceptor"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <global-results>
+            <result name="login">/WEB-INF/jsp/admin/index.jsp</result>
+        </global-results>
+        <action name="*" class="managerAction" method="{1}">
+            <result name="loginSuccess">/WEB-INF/jsp/admin/home.jsp</result>
+            <result name="loginInput">/WEB-INF/jsp/admin/index.jsp</result>
+            <result name="goIndexSuccess" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">index</param>
+            </result>
+            <result name="logoutSuccess" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">admin</param>
+            </result>
+            <interceptor-ref name="managerStack"/>
+        </action>
+    </package>
+
+</struts>

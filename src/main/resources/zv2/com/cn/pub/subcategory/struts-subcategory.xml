@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="pub-subcategory" namespace="/pub/subcategory" extends="struts-default">
+        <interceptors>
+            <interceptor name="loginInterceptor" class="loginInterceptor"/>
+            <interceptor-stack name="subcategoryStack">
+                <interceptor-ref name="loginInterceptor"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <global-results>
+            <result name="login">/WEB-INF/jsp/admin/index.jsp</result>
+        </global-results>
+        <action name="*" class="subcategoryAction" method="{1}">
+            <result name="listSuccess">/WEB-INF/jsp/admin/pub/subcategory/list.jsp</result>
+            <result name="goAddSuccess">/WEB-INF/jsp/admin/pub/subcategory/add.jsp</result>
+            <result name="addSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="deleteSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="selectedSuccess">/WEB-INF/jsp/admin/pub/subcategory/edit.jsp</result>
+            <result name="updateSuccess" type="redirectAction">list?pageIndex=1&amp;pageSize=10</result>
+            <result name="listByConditionSuccess">/WEB-INF/jsp/admin/pub/subcategory/list.jsp</result>
+            <interceptor-ref name="subcategoryStack"/>
+        </action>
+    </package>
+
+</struts>

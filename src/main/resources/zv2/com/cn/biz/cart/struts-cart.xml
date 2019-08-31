@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="biz-cart" namespace="/biz/cart" extends="struts-default">
+        <action name="*" class="cartAction" method="{1}">
+            <result name="addCartItemSuccess">/WEB-INF/jsp/cart.jsp</result>
+            <result name="clearSuccess">/WEB-INF/jsp/cart.jsp</result>
+            <result name="removeCartItemSuccess">/WEB-INF/jsp/cart.jsp</result>
+            <result name="goCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+        </action>
+    </package>
+
+</struts>
